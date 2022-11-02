@@ -1,15 +1,18 @@
 const express = require('express');
+const cors = require('cors')
 const db = require('./project/utils/database');
-const initModels = require('./project/models/initModels');
+
 const { port } = require('./config');
+
 const userRouter = require('./project/routers/users.router');
 const authRouter = require('./project/auth/auth.router');
+const categoriesRouter = require('./project/routers/categories.router');
+const recipeRouter = require('./project/routers/recipes.router');
 
-
+const initModels = require('./project/models/initModels');
 
 const server = express();
-
-
+server.use(express.json());
 server.use(express.json());
 
 db.authenticate()
@@ -28,6 +31,8 @@ server.get('/', (_, res) => {
 
 server.use('/api/v1/users', userRouter);
 server.use('/api/v1/auth', authRouter);
+app.use('/api/v1/categories', categoriesRouter)
+app.use('/api/v1/recipes', recipeRouter)
 
 
 

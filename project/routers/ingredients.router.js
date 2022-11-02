@@ -1,0 +1,29 @@
+const router = require('express').Router();
+const passport = require('passport');
+const adminMiddleware = require('../middlewares/role.middleware');
+
+const ingredientServices = require('../services/ingredients.services');
+require('../middlewares/auth.middleware')(passport);
+
+router.route('/')
+    .get(ingredientServices.getAllIngredients)
+    .post(
+        passport.authenticate('jwt', {session: false}),
+        adminMiddleware,
+        ingredientServices.postIngredient
+    )
+
+router.route('/:ingredient_id')
+    .get(ingredientServices.getIngredientById)
+    .patch(
+        passport.authenticate('jwt', {session: false}),
+        adminMiddleware,
+        ingredientServices.patchIngredient
+    )
+    .delete(
+        passport.authenticate('jwt', {session: false}),
+        adminMiddleware,
+        ingredientServices.deleteIngredient
+    )
+
+module.exports = router
