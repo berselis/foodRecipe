@@ -31,8 +31,18 @@ server.get('/', (_, res) => {
 
 server.use('/api/v1/users', userRouter);
 server.use('/api/v1/auth', authRouter);
-app.use('/api/v1/categories', categoriesRouter)
-app.use('/api/v1/recipes', recipeRouter)
+server.use('/api/v1/categories', categoriesRouter)
+server.use('/api/v1/recipes', recipeRouter)
+
+
+
+//user
+//types
+//categories
+//recipes
+//instructions
+//ingredients
+//recipes_ingredients
 
 
 
