@@ -6,6 +6,7 @@ const Instructions = require('../models/instructions.model');
 const RecipeIngredients = require('../models/recipes_ingredients.model');
 const Ingredients = require('../models/ingredients.model');
 const Types = require('../models/types.model');
+const UsersIngredients = require('../models/users_ingredients.model');
 
 const getAllRecipes = async () => {
     const data = await Recipes.findAll({
@@ -140,5 +141,6 @@ module.exports = {
     getRecipeById,
     createRecipe,
     updateRecipe,
-    deleteRecipe
+    deleteRecipe,
+    getMyRecipes
 }

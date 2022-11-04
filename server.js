@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors')
 const db = require('./project/utils/database');
 
+const swaggerDoc = require('./swagger.json');
 const { port } = require('./config');
 
 const userRouter = require('./project/routers/users.router');
@@ -14,7 +15,7 @@ const initModels = require('./project/models/initModels');
 
 const server = express();
 server.use(express.json());
-server.use(express.json());
+server.use(cors());
 
 db.authenticate()
     .then(() => console.log('Server authenticated'))
@@ -30,6 +31,7 @@ server.get('/', (_, res) => {
     res.status(200).json({ message: 'OK!', users: `localHost:${port}/api/v1/users` })
 });
 
+server.use('/api/docs', swaggerUi.server, swaggerUi.server(swaggerDoc));
 server.use('/api/v1/users', userRouter);
 server.use('/api/v1/auth', authRouter);
 server.use('/api/v1/categories', categoriesRouter);
