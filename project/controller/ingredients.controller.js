@@ -1,5 +1,6 @@
 const uuid = require('uuid');
 const Ingredients = require('../models/ingredients.model');
+const UsersIngredients = require('../models/users_ingredients.model');
 
 
 const getAllIngredients = async() => {
@@ -22,6 +23,16 @@ const createIngredient = async (data) => {
         name: data.name,
         typeId: data.typeId,
         urlImg: data.urlImg
+    })
+    return response
+}
+
+const addIngredientToUser = async(data) => {
+    const response = await UsersIngredients.create({
+        id: uuid.v4(),
+        amount: data.amount,
+        userId: data.userId,
+        ingredientId: data.ingredientId
     })
     return response
 }
@@ -50,7 +61,8 @@ module.exports = {
     getIngredientById,
     createIngredient,
     updateIngredient,
-    deleteIngredient
+    deleteIngredient,
+    addIngredientToUser
 }
 
 

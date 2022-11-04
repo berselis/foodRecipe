@@ -8,6 +8,7 @@ const userRouter = require('./project/routers/users.router');
 const authRouter = require('./project/auth/auth.router');
 const categoriesRouter = require('./project/routers/categories.router');
 const recipeRouter = require('./project/routers/recipes.router');
+const ingredientsRouter = require('./project/routers/ingredients.router');
 
 const initModels = require('./project/models/initModels');
 
@@ -31,8 +32,9 @@ server.get('/', (_, res) => {
 
 server.use('/api/v1/users', userRouter);
 server.use('/api/v1/auth', authRouter);
-server.use('/api/v1/categories', categoriesRouter)
-server.use('/api/v1/recipes', recipeRouter)
+server.use('/api/v1/categories', categoriesRouter);
+server.use('/api/v1/recipes', recipeRouter);
+server.use('/api/v1/ingredients', ingredientsRouter);
 
 
 
